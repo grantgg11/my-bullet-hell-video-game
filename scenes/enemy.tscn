@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cqnt17iaccbmy"]
+
+[ext_resource type="Script" uid="uid://b1xlg1e55iqot" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Texture2D" uid="uid://bkphyf0q035im" path="res://icon.svg" id="2_4ra3w"]
+
+[node name="enemy" type="Node2D" unique_id=167057307]
+script = ExtResource("1_md0e3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1293077788]
+texture = ExtResource("2_4ra3w")
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=217806464]
+
+[node name="Rotater" type="Node2D" parent="." unique_id=796043359]
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
