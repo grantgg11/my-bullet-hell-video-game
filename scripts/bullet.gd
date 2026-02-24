@@ -1,11 +1,15 @@
-extends Node2D
+extends Area2D
 
-const speed = 100
+@export var speed := 600.0
 
 
-func _process(delta: float) -> void:
-	# Just making the bullet go foward 
-	position += transform.x * speed * delta
+func _physics_process(delta: float) -> void:
+	global_position += Vector2.RIGHT.rotated(global_rotation) * speed * delta
+
+func _on_body_entered(body: Node) -> void:
+	if body.is_in_group("player"):
+		print("You died")
+		get_tree().reload_current_scene()
 
 func _on_KillTimer_timeout() -> void:
 	queue_free()
