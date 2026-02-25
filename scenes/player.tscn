@@ -178,7 +178,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uduk5")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -263,9 +263,8 @@ script = ExtResource("1_tuyoq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1982094066]
 sprite_frames = SubResource("SpriteFrames_nda51")
-animation = &"walk"
+animation = &"death"
 autoplay = "idle"
-frame_progress = 0.7476677
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=677652672]
 position = Vector2(0, -2)

@@ -45,3 +45,9 @@ func _on_shoot_timer_timeout() -> void:
 		get_tree().root.add_child(bullet)
 		bullet.global_position = s.global_position
 		bullet.global_rotation = s.global_rotation
+		
+		
+		
+		
+		
+#need to make sure the enemy and bullet restarts after each death.
