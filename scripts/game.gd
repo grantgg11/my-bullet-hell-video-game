@@ -5,7 +5,10 @@ extends Node2D
 
 var dead := false
 
+	
 func _ready() -> void:
+	set_health_label()
+	set_health_bar()
 	get_tree().paused = false
 	Engine.time_scale = 1.0
 
@@ -14,7 +17,7 @@ func _ready() -> void:
 	death_overlay.visible = false
 
 	player.died.connect(on_player_died)
-
+#when player dies, show death overlay and slow down time. 
 func on_player_died() -> void:
 	if dead:
 		return
@@ -32,3 +35,9 @@ func _input(event: InputEvent) -> void:
 		get_tree().paused = false
 		death_overlay.visible = false
 		get_tree().reload_current_scene()
+
+func set_health_label() -> void: 
+	$HealthLabel.text = "Health: %s" % player.health
+
+func set_health_bar() -> void: 
+	$HealthBar.value = player.health

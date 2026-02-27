@@ -13,11 +13,11 @@ func _on_body_entered(body: Node) -> void:
 		return
 	
 	hit = true
-	monitoring = false
-	monitorable = false
+	set_deferred("monitoring", false)
+	set_deferred("monitorable", false)
 	
-	if body.has_method("die"):
-		body.call("die")
+	if body.has_method("damage"):
+		body.call("damage")
 		
 	# Remove the bullet so it can't hit again
 	queue_free()

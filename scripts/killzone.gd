@@ -12,10 +12,10 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	triggered = true
 	
-	print("You died")
+	print("- 1 health")
 	Engine.time_scale = 0.5
-	if body.has_method("die"):
-		body.call("die")
+	if body.has_method("damage"):
+		body.call("damage")
 	timer.start()
 	
 func _on_timer_timeout() -> void:
