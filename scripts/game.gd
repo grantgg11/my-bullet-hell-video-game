@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 		get_tree().reload_current_scene()
 
 func set_health_label() -> void: 
-	$HealthLabel.text = "Health: %s" % player.health
+	$CanvasLayer/MarginContainer/VBoxContainer/HealthLabel.text = "Health: %s" % player.health
 
 func set_health_bar() -> void: 
-	$HealthBar.value = player.health
+	$CanvasLayer/MarginContainer/VBoxContainer/HealthBar.value = player.health

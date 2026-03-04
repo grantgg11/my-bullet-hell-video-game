@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bc1wjpm5bad23"]
+
+[ext_resource type="Script" uid="uid://dyc00pfwliis0" path="res://scripts/attack.gd" id="1_nursx"]
+[ext_resource type="Texture2D" uid="uid://wxbhmc5llnsj" path="res://assets/sprites/Arrow01(32x32).png" id="2_6fs0s"]
+[ext_resource type="Script" uid="uid://ct34y548ulut5" path="res://scripts/hit_area_2d.gd" id="2_jy1op"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8out"]
+size = Vector2(17, 2)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c8out"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fs0s"]
+size = Vector2(15, 3)
+
+[node name="Arrow2D" type="Area2D" unique_id=169941276]
+script = ExtResource("1_nursx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=954110206]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_c8out")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=835080503]
+texture = ExtResource("2_6fs0s")
+
+[node name="HitArea2D" type="Area2D" parent="." unique_id=796610662]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("2_jy1op")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D" unique_id=1876280286]
+position = Vector2(5, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_c8out")
+
+[node name="ImpactDetectorArea2D" type="Area2D" parent="." unique_id=1298097441]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetectorArea2D" unique_id=1524477454]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_6fs0s")
+
+[node name="Timer" type="Timer" parent="." unique_id=23787335]

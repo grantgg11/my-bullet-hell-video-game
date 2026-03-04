@@ -115,6 +115,31 @@ speed = 400
 position = Vector2(590, 316)
 scale = Vector2(0.5, 0.5)
 
+[node name="enemy2" parent="." unique_id=862046387 instance=ExtResource("2_yqjtg")]
+position = Vector2(225, 435)
+scale = Vector2(0.5, 0.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1212980408]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=2127907792]
+custom_minimum_size = Vector2(20, 20)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=1726244916]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1585972510]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=2137655862]
+layout_mode = 2
+max_value = 5.0
+step = 1.0
+show_percentage = false
+
 [node name="DeathOverlay" type="CanvasLayer" parent="." unique_id=1977830103]
 visible = false
 
@@ -149,22 +174,5 @@ vertical_alignment = 1
 layout_mode = 2
 text = "PRESS ENTER TO TRY AGAIN"
 label_settings = SubResource("LabelSettings_gee14")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HealthBar" type="ProgressBar" parent="." unique_id=2137655862]
-offset_left = 285.0
-offset_top = 5.0
-offset_right = 424.0
-offset_bottom = 32.0
-max_value = 5.0
-step = 1.0
-show_percentage = false
-
-[node name="HealthLabel" type="Label" parent="." unique_id=1585972510]
-offset_left = 289.0
-offset_top = -18.0
-offset_right = 423.0
-offset_bottom = 5.0
 horizontal_alignment = 1
 vertical_alignment = 1

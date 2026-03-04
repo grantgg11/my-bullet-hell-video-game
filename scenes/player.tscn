@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bkde3s4pkng7n" path="res://scripts/player.gd" id="1_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://dknmxr7mbw00h" path="res://assets/sprites/player/Soldier-Attack03.png" id="1_ws0vm"]
+[ext_resource type="PackedScene" uid="uid://bc1wjpm5bad23" path="res://scenes/attack.tscn" id="2_fjrip"]
 [ext_resource type="Texture2D" uid="uid://cpckf7ds37gr6" path="res://assets/sprites/player/Soldier-Death.png" id="2_rhr3r"]
 [ext_resource type="Texture2D" uid="uid://yxrlcal3mjv" path="res://assets/sprites/player/Soldier-Hurt.png" id="3_t53lx"]
 [ext_resource type="Texture2D" uid="uid://clgfjcrc46jex" path="res://assets/sprites/player/Soldier-Idle.png" id="4_yi2kj"]
@@ -161,9 +162,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ugk0l")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -195,9 +196,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7oyl4")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
-"speed": 10.0
+"speed": 13.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -260,13 +261,16 @@ height = 16.0
 scale = Vector2(1.5, 1.5)
 collision_layer = 2
 script = ExtResource("1_tuyoq")
-speed = null
+projectile_scene = ExtResource("2_fjrip")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1982094066]
 sprite_frames = SubResource("SpriteFrames_nda51")
-animation = &"death"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=677652672]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_ws0vm")
+
+[node name="ShootPoint" type="Marker2D" parent="." unique_id=1910647400]
+position = Vector2(4.666667, -0.6666667)

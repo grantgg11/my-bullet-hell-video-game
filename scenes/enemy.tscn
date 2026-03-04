@@ -3,7 +3,12 @@
 [ext_resource type="Script" uid="uid://b1xlg1e55iqot" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://c2kcre45ysrrb" path="res://assets/sprites/enemy/Wizard Frog.png" id="2_md0e3"]
 
-[node name="enemy" type="Node2D" unique_id=167057307]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
+size = Vector2(54, 46)
+
+[node name="enemy" type="CharacterBody2D" unique_id=396549654]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_md0e3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1293077788]
@@ -14,4 +19,12 @@ texture = ExtResource("2_md0e3")
 
 [node name="Rotater" type="Node2D" parent="." unique_id=796043359]
 
+[node name="Timer" type="Timer" parent="." unique_id=257413793]
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2013223622]
+position = Vector2(-4, 24)
+shape = SubResource("RectangleShape2D_md0e3")
+
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
