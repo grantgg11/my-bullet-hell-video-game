@@ -107,16 +107,11 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 65536, 0, 2, 65536, 0, 3, 65536
 
 [node name="Player" parent="." unique_id=620899884 instance=ExtResource("1_uwrxv")]
 position = Vector2(103, 51)
-speed = 400
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1393243205]
 
 [node name="enemy" parent="." unique_id=167057307 instance=ExtResource("2_yqjtg")]
 position = Vector2(590, 316)
-scale = Vector2(0.5, 0.5)
-
-[node name="enemy2" parent="." unique_id=862046387 instance=ExtResource("2_yqjtg")]
-position = Vector2(225, 435)
 scale = Vector2(0.5, 0.5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1212980408]

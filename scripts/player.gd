@@ -24,84 +24,62 @@ func _ready() -> void:
 	print("PLAYER READY. paused=", get_tree().paused, " process_mode=", process_mode)
 
 func _physics_process(_delta: float) -> void:
-	if Engine.get_physics_frames() % 60 == 0:
-		print("PLAYER TICK")
+	update_mouse_aim()
 	if Input.is_action_just_pressed("attack"):
-		print("ATTACK PRESSED")
 		attack()
 		
 	get_input()
+	update_animation()
 	move_and_slide()
 
+func update_mouse_aim() -> void:
+	var mouse_dir := get_global_mouse_position() - global_position
+	if mouse_dir.length() >0.0: 
+		last_aim_dir = mouse_dir.normalized()
+	if last_aim_dir.x >0.0:
+		animated_sprite.flip_h = false
+	elif last_aim_dir.x < 0.0:
+		animated_sprite.flip_h = true
+	
 func get_input():
-	if is_dead or is_hurt or is_attacking:
+	if is_dead or is_hurt:
+		velocity = Vector2.ZERO
 		return
 	#get the user directional input 
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if input_direction != Vector2.ZERO:
-		last_aim_dir = input_direction.normalized()
 	velocity = input_direction * speed
-	
-	# Flip based on horizontal movement only
-	if input_direction.x > 0.0:
-		animated_sprite.flip_h = false
-	elif input_direction.x < 0.0:
-		animated_sprite.flip_h = true
-	
-	# play animations
-	if input_direction == Vector2.ZERO:
-		animated_sprite.play("idle")
-	else:
-		animated_sprite.play("walk")
 
 func attack() -> void:
-	print("attack() dead=", is_dead,
-		" hurt=", is_hurt,
-		" attacking=", is_attacking,
-		" can_attack=", can_attack,
-		" proj_null=", projectile_scene == null,
-		" has_attack_anim=", animated_sprite.sprite_frames.has_animation("attack"))
 	if is_dead or is_hurt or is_attacking or not can_attack:
 		return
 	if projectile_scene == null:
 		return
-
+		
 	can_attack = false
 	is_attacking = true
-
-	# Stop moving during attack (optional, but common)
-	velocity = Vector2.ZERO
-
-	# Face the aim direction if you want attack to match direction
-	if last_aim_dir.x > 0.0:
-		animated_sprite.flip_h = false
-	elif last_aim_dir.x < 0.0:
-		animated_sprite.flip_h = true
-
+	# Update aim right before firing
+	update_mouse_aim()
+	
 	animated_sprite.play("attack")
-
-	# Spawn projectile (simple: spawn right away)
 	_spawn_projectile(last_aim_dir)
-
 	# Wait until attack animation ends
 	await animated_sprite.animation_finished
-
 	is_attacking = false
-
+	
 	# Small cooldown to prevent spamming
 	await get_tree().create_timer(attack_cooldown).timeout
 	can_attack = true
 
 func _spawn_projectile(dir: Vector2) -> void:
 	var proj := projectile_scene.instantiate()
-
+	get_tree().current_scene.add_child(proj)
+	proj.global_position = muzzle.global_position + dir * 8.0
+	
 	if proj.has_method("set_direction"):
-		proj.call("set_direction", dir)
+		proj.set_direction(dir)
 	else:
 		proj.direction = dir.normalized()
-
-	get_tree().current_scene.add_child(proj)
-	proj.global_position = muzzle.global_position
+		
 	print("spawn", muzzle.global_position, "dir", last_aim_dir)
 
 func damage() -> void: 
@@ -129,6 +107,25 @@ func die() -> void:
 	velocity = Vector2.ZERO
 	animated_sprite.play("death")
 	emit_signal("died")
+
+func update_animation() -> void:
+	if is_dead:
+		return
+		
+	if is_hurt:
+		if animated_sprite.animation != "hurt":
+			animated_sprite.play("hurt")
+		return
+		
+	if is_attacking:
+		if animated_sprite.animation != "attack":
+			animated_sprite.play("attack")
+		return
+		
+	if velocity == Vector2.ZERO:
+		animated_sprite.play("idle")
+	else:
+		animated_sprite.play("walk")
 
 
 	

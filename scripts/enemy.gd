@@ -5,6 +5,7 @@ const bullet_scene: PackedScene = preload("res://scenes/bullet.tscn")
 @onready var shoot_timer = $ShootTimer
 @onready var rotater = $Rotater
 @onready var timer: Timer = $Timer
+@onready var health_bar: ProgressBar = $HealthBar
 
 #For bullets
 const rotate_speed: float = 100.0
@@ -17,8 +18,24 @@ var direction: Vector2 = Vector2.LEFT
 const speed: float = 100.0
 var is_enemy_chase: bool = false
 
+#Enemy Attributes
+@export var bar_offset := Vector2(-25, -40)
+@export var max_health := 100
+var current_health := 100
+var is_dead := false
+var is_hurt := false
+
 
 func _ready():
+	add_to_group("enemy")
+	#populate health bar 
+	current_health = max_health
+	health_bar.position = bar_offset
+	health_bar.size = Vector2(50, 8)
+	health_bar.max_value = max_health
+	health_bar.value = current_health
+	health_bar.show_percentage = false
+	health_bar.visible = true 
 	# Create spawn points around the rotater
 	var step := TAU / spawn_point_count
 	
@@ -63,3 +80,19 @@ func _on_timer_timeout() -> void:
 func choose(array):
 	array.shuffle()
 	return array.front()
+	
+func take_damage(amount: int) -> void:
+	print("ENEMY TOOK DAMAGE:", amount)
+	#add damage animation
+	current_health = max(current_health - amount, 0)
+	health_bar.value = current_health
+	#remove enemy from scene
+	if current_health <= 0:
+		#add death animation here
+		queue_free()
+		
+
+func _on_hide_timer_timeout() -> void:
+	health_bar.visible = false
+
+	

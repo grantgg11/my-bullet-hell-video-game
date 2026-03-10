@@ -6,14 +6,41 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(54, 46)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_md0e3"]
+bg_color = Color(0.72978187, 0, 0.11626757, 1)
+border_color = Color(0.0030034326, 0.0106146615, 0.0017479514, 1)
+border_blend = true
+corner_detail = 15
+shadow_color = Color(0, 0, 0, 0.5921569)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ra3w"]
+bg_color = Color(0.25344846, 0.7144242, 0, 1)
+border_color = Color(0.0025170015, 0.010644979, 0.0029033085, 1)
+border_blend = true
+corner_detail = 15
+
 [node name="enemy" type="CharacterBody2D" unique_id=396549654]
-collision_layer = 4
-collision_mask = 3
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_md0e3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1293077788]
 scale = Vector2(3, 3)
 texture = ExtResource("2_md0e3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2013223622]
+position = Vector2(-5, 26)
+shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1436398578]
+offset_left = -31.0
+offset_top = -12.0
+offset_right = 23.0
+offset_bottom = -7.0
+theme_override_styles/background = SubResource("StyleBoxFlat_md0e3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4ra3w")
+max_value = 5.0
+show_percentage = false
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=217806464]
 
@@ -21,10 +48,6 @@ texture = ExtResource("2_md0e3")
 
 [node name="Timer" type="Timer" parent="." unique_id=257413793]
 autostart = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2013223622]
-position = Vector2(-4, 24)
-shape = SubResource("RectangleShape2D_md0e3")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
