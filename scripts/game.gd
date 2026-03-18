@@ -2,8 +2,11 @@ extends Node2D
 
 @onready var death_overlay: CanvasLayer = $DeathOverlay
 @onready var player: CharacterBody2D = $Player
+@onready var victory_screen: CanvasLayer = $VictoryScreen
+@onready var enemy = $enemy
 
 var dead := false
+var win := false 
 
 	
 func _ready() -> void:
@@ -14,9 +17,12 @@ func _ready() -> void:
 
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	death_overlay.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	victory_screen.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	death_overlay.visible = false
+	victory_screen.visible = false 
 
 	player.died.connect(on_player_died)
+	enemy.win.connect(on_enemy_died)
 #when player dies, show death overlay and slow down time. 
 func on_player_died() -> void:
 	if dead:
@@ -29,6 +35,16 @@ func on_player_died() -> void:
 
 	get_tree().paused = true
 	death_overlay.visible = true
+	
+func on_enemy_died() -> void:
+	if win: 
+		return 
+	win = true
+	Engine.time_scale = 0.5
+	await get_tree().create_timer(0.6).timeout
+	Engine.time_scale = 1.0
+	get_tree().paused = true
+	victory_screen.visible = true
 
 func _input(event: InputEvent) -> void:
 	if dead and event.is_action_pressed("restart"):
@@ -37,7 +53,7 @@ func _input(event: InputEvent) -> void:
 		get_tree().reload_current_scene()
 
 func set_health_label() -> void: 
-	$CanvasLayer/MarginContainer/VBoxContainer/HealthLabel.text = "Health: %s" % player.health
+	$HealthBar/MarginContainer/VBoxContainer/HealthLabel.text = "Health: %s" % player.health
 
 func set_health_bar() -> void: 
-	$CanvasLayer/MarginContainer/VBoxContainer/HealthBar.value = player.health
+	$HealthBar/MarginContainer/VBoxContainer/HealthBar.value = player.health

@@ -7,6 +7,7 @@ const bullet_scene: PackedScene = preload("res://scenes/bullet.tscn")
 @onready var timer: Timer = $Timer
 @onready var health_bar: ProgressBar = $HealthBar
 
+signal win
 #For bullets
 const rotate_speed: float = 100.0
 const shooter_timer_wait_time: float = 0.2
@@ -89,7 +90,10 @@ func take_damage(amount: int) -> void:
 	#remove enemy from scene
 	if current_health <= 0:
 		#add death animation here
+		is_dead = true
+		emit_signal("win")
 		queue_free()
+		
 		
 
 func _on_hide_timer_timeout() -> void:
