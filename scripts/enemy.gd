@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const bullet_scene: PackedScene = preload("res://scenes/bullet.tscn")
-
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var shoot_timer = $ShootTimer
 @onready var rotater = $Rotater
 @onready var timer: Timer = $Timer
@@ -25,7 +25,7 @@ var is_enemy_chase: bool = false
 var current_health := 100
 var is_dead := false
 var is_hurt := false
-
+var is_attacking: bool = false
 
 func _ready():
 	add_to_group("enemy")
@@ -51,6 +51,8 @@ func _ready():
 	shoot_timer.wait_time = shooter_timer_wait_time
 	shoot_timer.start()
 	
+	animated_sprite_2d.play("WizardFrog -Idle")
+	
 func _physics_process(delta: float) -> void:
 	# movement belongs in _physics_process for CharacterBody2D
 	if not is_enemy_chase:
@@ -65,13 +67,15 @@ func _physics_process(delta: float) -> void:
 	rotater.rotation_degrees = fmod(new_rotation, 360.0)
 
 func _on_shoot_timer_timeout() -> void:
+	is_attacking = true
 	for s in rotater.get_children():
 		var bullet := bullet_scene.instantiate()
 		get_tree().current_scene.add_child(bullet)
 		bullet.global_position = s.global_position
 		bullet.global_rotation = s.global_rotation
 		
-		
+	await animated_sprite_2d.animation_finished
+	is_attacking = false
 func _on_timer_timeout() -> void:
 	#random time for enemy movement
 	timer.wait_time = choose([1.0, 1.5, 2.0])

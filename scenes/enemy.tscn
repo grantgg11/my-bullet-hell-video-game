@@ -1,10 +1,66 @@
 [gd_scene format=3 uid="uid://cqnt17iaccbmy"]
 
 [ext_resource type="Script" uid="uid://b1xlg1e55iqot" path="res://scripts/enemy.gd" id="1_md0e3"]
-[ext_resource type="Texture2D" uid="uid://c2kcre45ysrrb" path="res://assets/sprites/enemy/Wizard Frog.png" id="2_md0e3"]
+[ext_resource type="Texture2D" uid="uid://ckofo5qe1627a" path="res://assets/sprites/enemy/Wizard Frog/Wizard Frog-Move.png" id="2_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://wa045d05ih5g" path="res://assets/sprites/enemy/Wizard Frog/Wizard Frog Attack-Sheet.png" id="2_5uy6h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nenq2"]
+atlas = ExtResource("2_5uy6h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md484"]
+atlas = ExtResource("2_5uy6h")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipns3"]
+atlas = ExtResource("2_5uy6h")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4w8v"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_md0e3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nenq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md484")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipns3")
+}],
+"loop": true,
+"name": &"WizardFrog -Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uy6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4w8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwavj")
+}],
+"loop": true,
+"name": &"WizardFrog -Idle",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
-size = Vector2(54, 46)
+size = Vector2(40, 46)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_md0e3"]
 bg_color = Color(0.72978187, 0, 0.11626757, 1)
@@ -24,12 +80,15 @@ collision_layer = 2
 collision_mask = 21
 script = ExtResource("1_md0e3")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1293077788]
-scale = Vector2(3, 3)
-texture = ExtResource("2_md0e3")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1941214747]
+position = Vector2(-7.9999986, 9)
+scale = Vector2(2.1875, 2.4375)
+sprite_frames = SubResource("SpriteFrames_md0e3")
+animation = &"WizardFrog -Attack"
+autoplay = "WizardFrog -Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2013223622]
-position = Vector2(-5, 26)
+position = Vector2(-9, 25)
 shape = SubResource("RectangleShape2D_md0e3")
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=1436398578]

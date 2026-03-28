@@ -239,6 +239,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
+[node name="Label2" type="Label" parent="VictoryScreen/VBoxContainer" unique_id=1961256511]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.627451, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49019608)
+theme_override_colors/font_outline_color = Color(18.892157, 18.892157, 18.892157, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 18
+text = "Press ENTER if you dare to continue!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=658915870]
 collision_layer = 16
 collision_mask = 15

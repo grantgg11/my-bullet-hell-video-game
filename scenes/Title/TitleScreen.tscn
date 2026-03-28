@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://c1ivjbg2mj7gf"]
+
+[ext_resource type="Script" uid="uid://bwefspgeggtb6" path="res://scripts/Title/title_screen.gd" id="1_shq1h"]
+[ext_resource type="Texture2D" uid="uid://hhbmjb6morvs" path="res://assets/sprites/Title/Title Part 1.png" id="2_q5ct6"]
+[ext_resource type="Texture2D" uid="uid://bwu2an7u8dqse" path="res://assets/sprites/Title/Title Part 2.png" id="3_c8l4c"]
+[ext_resource type="Texture2D" uid="uid://br7gji7d2wx6n" path="res://assets/sprites/Title/Title Part 3.png" id="4_1xpu1"]
+[ext_resource type="Texture2D" uid="uid://wa045d05ih5g" path="res://assets/sprites/enemy/Wizard Frog/Wizard Frog Attack-Sheet.png" id="5_c8l4c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xpu1"]
+atlas = ExtResource("5_c8l4c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogamj"]
+atlas = ExtResource("5_c8l4c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uam1j"]
+atlas = ExtResource("5_c8l4c")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q5ct6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xpu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogamj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uam1j")
+}],
+"loop": true,
+"name": &"Frog",
+"speed": 3.0
+}]
+
+[node name="TitleScreen" type="Node2D" unique_id=1565198920]
+script = ExtResource("1_shq1h")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=843662101]
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 1155.0
+offset_bottom = 663.0
+color = Color(0.25786677, 0.09028675, 0.0006240725, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect" unique_id=409575741]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 135.0
+offset_right = 1144.0
+offset_bottom = 313.0
+color = Color(0.41770497, 1.022479, 0.9824277, 0.77254903)
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect" unique_id=1482899174]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 265.0
+offset_right = 725.0
+offset_bottom = 300.0
+color = Color(17.554007, 18.187868, 18.892157, 0.9098039)
+
+[node name="TitlePart1" type="Sprite2D" parent="." unique_id=689831785]
+position = Vector2(253, 183)
+scale = Vector2(1.5273438, 3.15625)
+texture = ExtResource("2_q5ct6")
+
+[node name="TitlePart2" type="Sprite2D" parent="." unique_id=1345996158]
+position = Vector2(599.5, 191.5)
+scale = Vector2(1.83125, 3.28125)
+texture = ExtResource("3_c8l4c")
+
+[node name="TitlePart3" type="Sprite2D" parent="." unique_id=863821455]
+position = Vector2(940.00006, 193.00002)
+scale = Vector2(1.1770834, 2.75)
+texture = ExtResource("4_1xpu1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=655493759]
+offset_left = 23.0
+offset_top = 258.0
+offset_right = 1129.0
+offset_bottom = 328.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1878651975]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2901961, 0, 1, 1)
+theme_override_colors/font_shadow_color = Color(15.439395, 15.501258, 18.225233, 0)
+theme_override_colors/font_outline_color = Color(4.916576, 3.488856, 1.8930901e-05, 1)
+text = "Press ENTER to begin the journey!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1859835571]
+position = Vector2(593, 414)
+scale = Vector2(9.546872, 11.59375)
+sprite_frames = SubResource("SpriteFrames_q5ct6")
+animation = &"Frog"
+autoplay = "Frog"

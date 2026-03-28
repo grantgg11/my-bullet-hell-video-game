@@ -45,6 +45,11 @@ func on_enemy_died() -> void:
 	Engine.time_scale = 1.0
 	get_tree().paused = true
 	victory_screen.visible = true
+	victory()
+
+func victory() -> void: 
+	if victory_screen.visible == true and Input.is_action_pressed("Start"):
+		get_tree().change_scene_to_file("res://scenes/Title/TitleScreen.tscn")
 
 func _input(event: InputEvent) -> void:
 	if dead and event.is_action_pressed("restart"):

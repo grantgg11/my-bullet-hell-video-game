@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2kcre45ysrrb"
-path="res://.godot/imported/Wizard Frog.png-ef8d6067a1c4f90e1ad5d8f2fd2e0525.ctex"
+uid="uid://br7gji7d2wx6n"
+path="res://.godot/imported/Title Part 3.png-393c9ff0a872e789679fc4a49808b091.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/Wizard Frog.png"
-dest_files=["res://.godot/imported/Wizard Frog.png-ef8d6067a1c4f90e1ad5d8f2fd2e0525.ctex"]
+source_file="res://assets/sprites/Title/Title Part 3.png"
+dest_files=["res://.godot/imported/Title Part 3.png-393c9ff0a872e789679fc4a49808b091.ctex"]
 
 [params]
 
